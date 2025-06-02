@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int main()
+{
+    int t;
+    int m1,m2,m3,m4,m5;
+    scanf("%d %d %d %d %d",&m1,&m2,&m3,&m4,&m5);
+    printf("\n marks out of 25 \n");
+    t=m1+m2+m3+m4+m5;
+    printf("%d\n",t);
+    if(t>=90)
+    printf("grade:A");
+    else if(t>=80)
+    printf("grade:B");
+    else if(t>=60)
+    printf("grade:C");
+    else
+    printf("grade:D");
+    
+}
