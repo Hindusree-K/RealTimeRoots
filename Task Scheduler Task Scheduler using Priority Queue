@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <string.h>
+#define MAX 10
+struct Task {
+    char name[10];
+    int priority;
+    int burst_time;
+};
+void sortTasks(struct Task tasks[], int n) {
+    for (int i = 0; i < n-1; i++) {
+        for (int j = i+1; j < n; j++) {
+            if (tasks[i].priority > tasks[j].priority) {
+                struct Task temp = tasks[i];
+                tasks[i] = tasks[j];
+                tasks[j] = temp;
+            }
+        }
+    }
+}
+int main() {
+    int n;
+    printf("Enter number of tasks: ");
+    scanf("%d", &n);
+    struct Task tasks[MAX];
+    for (int i = 0; i < n; i++) {
+        printf("\nEnter Task %d name: ", i+1);
+        scanf("%s", tasks[i].name);
+        printf("Enter Priority (1 = highest): ");
+        scanf("%d", &tasks[i].priority);
+        printf("Enter Burst Time (ms): ");
+        scanf("%d", &tasks[i].burst_time);
+    }
+    sortTasks(tasks, n);
+    printf("\n--- Task Scheduling Order ---\n");
+    int current_time = 0;
+    for (int i = 0; i < n; i++) {
+        printf("Time %dms: Running %s (Priority %d, Burst %dms)\n", 
+                current_time, tasks[i].name, tasks[i].priority, tasks[i].burst_time);
+        current_time += tasks[i].burst_time;
+    }
+    printf("All tasks completed at time %dms.\n", current_time);
+    return 0;
+}
